@@ -9,7 +9,7 @@
     <div [ngSwitch]="gaugeDialog.type">
         <div *ngSwitchCase="gaugeDialogType.Chart">
             <app-chart-property [data]="gaugeDialog.data" [reload]="reloadGaugeDialog" (onPropChanged)="onGaugeDialogChanged($event)"></app-chart-property>
-        </div>        
+        </div>
         <div *ngSwitchCase="gaugeDialogType.Graph">
             <app-graph-property [data]="gaugeDialog.data" [reload]="reloadGaugeDialog" (onPropChanged)="onGaugeDialogChanged($event)"></app-graph-property>
         </div>
@@ -177,7 +177,7 @@
                             <div class="svg-tool-button" matTooltip="{{'editor.controls-table' | translate}}" [ngClass]="{'svg-tool-active': isModeActive('own_ctrl-table')}"
                                 (click)="setMode('own_ctrl-table')">
                                 <span class="icon-tool icon-table"></span>
-                            </div>                            
+                            </div>
                             <div class="svg-tool-button" matTooltip="{{'editor.controls-iframe' | translate}}" [ngClass]="{'svg-tool-active': isModeActive('own_ctrl-iframe')}"
                                 (click)="setMode('own_ctrl-iframe')">
                                 <span class="icon-tool icon-iframe"></span>
@@ -200,7 +200,7 @@
                                 <span class="icon-tool" [style.backgroundImage]="'url(' + shape.ico + ')'"> </span>
                             </div>
                         </div>
-                    </mat-expansion-panel>  
+                    </mat-expansion-panel>
                     <!-- RESOURCES -->
                     <mat-expansion-panel class="svg-workarea-leftbar-p" hideToggle="true">
                         <mat-expansion-panel-header class="svg-workarea-leftbar-h" style="max-height: 32px;height: 32px">
@@ -211,7 +211,7 @@
                             <mat-icon aria-label="Add" matTooltip="{{'editor.image-add' | translate}}" class="leftbar-edit-btn" (click)="onAddResource();$event.stopPropagation()">add
                             </mat-icon>
                         </mat-expansion-panel-header>
-                    </mat-expansion-panel>              
+                    </mat-expansion-panel>
                 </div>
             </mat-accordion>
         </mat-drawer>
@@ -221,6 +221,22 @@
             <!-- SVG-EDITOR -->
             <div [style.display]="(editorMode === editorModeType.SVG)?'block':'none' ">
                 <!-- RIGHT BAR -->
+                <div class="svg-tools-fly"  ngDraggable style="margin-right: 240px;cursor: move;"
+                    (opened)="panelPropertyTransformOpenState = true" (closed)="panelPropertyTransformOpenState = false"
+                    expanded="true">
+                    <mat-expansion-panel class="svg-workarea-fly-p">
+                        <mat-expansion-panel-header class="svg-workarea-leftbar-h">
+                            <mat-panel-title>
+                                <span>控件列表</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div style="max-height: 250px;overflow-y:scroll">
+                            <div *ngFor="let item of controlList;let i = index" (click)="ocChoose(item,i)"
+                                [class]="item.isActive ===false ? 'conterLsit' :'conterLsitChoose'">
+                                <span>{{item.id}}</span></div>
+                        </div>
+                    </mat-expansion-panel>
+                </div>
                 <div class="svg-tools-fly" [style.display]="(isAnySelected)?'block':'none' ">
                     <mat-expansion-panel class="svg-workarea-fly-p" (opened)="panelPropertyIdOpenState = true" (closed)="panelPropertyIdOpenState = false" hideToggle="true"
                         expanded="true" style="display:none">
@@ -244,7 +260,7 @@
                             </div>
                         </div>
                     </mat-expansion-panel>
-                    <mat-expansion-panel class="svg-workarea-fly-p" [style.display]="(selectedElement)?'block':'none'" (opened)="panelPropertyTransformOpenState = true" 
+                    <mat-expansion-panel class="svg-workarea-fly-p" [style.display]="(selectedElement)?'block':'none'" (opened)="panelPropertyTransformOpenState = true"
                         (closed)="panelPropertyTransformOpenState = false" hideToggle="true" expanded="true">
                         <mat-expansion-panel-header class="svg-workarea-leftbar-h">
                             <mat-panel-title>
@@ -259,7 +275,7 @@
                                     <div class="svg-property-split2">
                                         <div class="svg-property">
                                             <span>{{'editor.transform-x' | translate}}</span>
-                                            <input numberOnly id="selected_x" class="attr_changer rightbar-input" type="number" matTooltip="{{'editor.transform-x-title' | translate}}" 
+                                            <input numberOnly id="selected_x" class="attr_changer rightbar-input" type="number" matTooltip="{{'editor.transform-x-title' | translate}}"
                                                     size="4" data-attr="x" />
                                         </div>
                                         <div class="svg-property">
@@ -597,7 +613,7 @@
                             </div>
                         </div>
                     </mat-expansion-panel>
-                    <mat-expansion-panel id="interaction_panel" class="svg-workarea-fly-p" [style.display]="(selectedElement)?'block':'none'" (opened)="panelEventOpenState = true" 
+                    <mat-expansion-panel id="interaction_panel" class="svg-workarea-fly-p" [style.display]="(selectedElement)?'block':'none'" (opened)="panelEventOpenState = true"
                         (closed)="panelEventOpenState = false" hideToggle="true" expanded="true">
                         <mat-expansion-panel-header class="svg-workarea-leftbar-h">
                             <mat-panel-title>
@@ -804,7 +820,7 @@
                     </button>
                 </div>
                 <div style="position: absolute; top: 37px; left: 0px;right: 0px; bottom: 0px; background-color: rgba(247, 247, 247, 1);">
-                    <app-cards-view #cardsview [edit]="true" [view]="currentView" [hmi]="hmi" [gaugesManager]="gaugesManager" 
+                    <app-cards-view #cardsview [edit]="true" [view]="currentView" [hmi]="hmi" [gaugesManager]="gaugesManager"
                                 (editCard)="editCardsWidget($event)" (save)="onSaveProject()"></app-cards-view>
                     <!-- <div class="grid-stack"></div> -->
                     <button mat-fab color="primary" (click)="addCard()" class="fab-add">
@@ -1047,7 +1063,7 @@
             <a id="#move_back">{{'editor.cmenu-send-back' | translate}}
                 <span class="shortcut">SHFT+CTRL+[</span>
             </a>
-        </li>        
+        </li>
         <li>
             <a id="#move_down">{{'editor.cmenu-send-backward' | translate}}
                 <span class="shortcut">CTRL+[</span>
